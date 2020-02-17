@@ -3,6 +3,7 @@ import { expect } from 'chai';
 import { ScatterChart, Scatter, CartesianGrid, Tooltip, XAxis, YAxis, ZAxis,
   CartesianAxis, Legend, Cross, Symbols } from 'recharts';
 import { mount, render } from 'enzyme';
+import sinon from 'sinon';
 
 describe('ScatterChart of three dimension data', () => {
   const data01 = [
@@ -92,8 +93,8 @@ describe('ScatterChart of two dimension data', () => {
 
   const wrapper = render(
     <ScatterChart width={400} height={400} margin={{ top: 20, right: 20, bottom: 20, left: 20 }}>
-      <XAxis dataKey={'x'} name="stature" unit="cm" />
-      <YAxis dataKey={'y'} name="weight" unit="kg" />
+      <XAxis dataKey="x" name="stature" unit="cm" />
+      <YAxis dataKey="y" name="weight" unit="kg" />
       <Scatter line name="A school" data={data} fill="#ff7300" />
     </ScatterChart>
   );
@@ -105,4 +106,31 @@ describe('ScatterChart of two dimension data', () => {
     expect(wrapper.find('.recharts-scatter-line').length).to.equal(1);
   });
 
+  it('click on scatter chart should invoke onClick callback', () => {
+    const onClick = sinon.spy();
+    const mountedWrapper = mount(
+      <ScatterChart width={400} height={400} margin={{ top: 20, right: 20, bottom: 20, left: 20 }} onClick={onClick}>
+        <XAxis dataKey="x" name="stature" unit="cm" />
+        <YAxis dataKey="y" name="weight" unit="kg" />
+        <Scatter line name="A school" data={data} fill="#ff7300" />
+      </ScatterChart>
+    );
+
+    const scatter = mountedWrapper.find(Scatter);
+    scatter.simulate('click');
+    expect(onClick.calledOnce).to.equal(true);
+  });
+
+  it('double click on scatter chart should invoke onDoubleClick callback', () => {
+    const onDoubleClick = sinon.spy();
+    const mountedWrapper = mount(
+      <ScatterChart width={400} height={400} margin={{ top: 20, right: 20, bottom: 20, left: 20 }} onDoubleClick={onDoubleClick}>
+        <XAxis dataKey="x" name="stature" unit="cm" />
+        <YAxis dataKey="y" name="weight" unit="kg" />
+        <Scatter line name="A school" data={data} fill="#ff7300" />
+      </ScatterChart>
+    );
+    mountedWrapper.instance().props.onDoubleClick();
+    expect(onDoubleClick.calledOnce).to.equal(true);
+  });
 });

@@ -130,4 +130,20 @@ describe('<PieChart />', () => {
     expect(onMouseLeave.calledOnce).to.equal(true);
     */
   });
+
+  it('double click should invoke onDoubleClick callback', () => {
+    const onDoubleClick = sinon.spy();
+    const wrapper = mount(
+      <PieChart
+        width={800}
+        height={400}
+        onDoubleClick={onDoubleClick}
+      >
+        <Pie dataKey="value" isAnimationActive={false} data={data} cx={200} cy={200} outerRadius={80} fill="#ff7300" label />
+      </PieChart>
+    );
+
+    wrapper.instance().props.onDoubleClick();
+    expect(onDoubleClick.calledOnce).to.equal(true);
+  });
 });

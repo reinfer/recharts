@@ -130,6 +130,10 @@ export default class Demo extends Component {
     });
   };
 
+  handleDoubleClick = (data, index, e) => {
+    console.log(`Double Click invoked on Pie Sector ${index} with: `, data);
+  }
+
   handlePieChartEnter = (a, b, c) => {
     console.log(a, b, c);
   };
@@ -164,6 +168,7 @@ export default class Demo extends Component {
               endAngle={0}
               outerRadius={80}
               label
+              onDoubleClick={this.handleDoubleClick}
             >
               {
                 data01.map((entry, index) => (
@@ -275,4 +280,3 @@ export default class Demo extends Component {
     );
   }
 }
-

@@ -307,6 +307,18 @@ describe('<LineChart />', () => {
     expect(eventOfCallback).to.include.all.keys(['currentTarget', 'target']);
   });
 
+  it('double clicking on Curve should invoke onDoubleClick callback', () => {
+    const onDoubleClick = sinon.spy();
+    const wrapper = mount(
+      <LineChart width={400} height={400} data={data} margin={{ top: 20, right: 20, bottom: 20, left: 20 }}>
+        <Line onDoubleClick={onDoubleClick} type="monotone" dataKey="uv" stroke="#ff7300" />
+      </LineChart>
+    );
+    const curve = wrapper.find(Curve);
+    curve.simulate('dblclick');
+    expect(onDoubleClick.calledOnce).to.equal(true);
+  });
+
   it('should show tooltip cursor on MouseEnter and MouseMove and hide on MouseLeave', () => {
     const margin = { top: 20, right: 20, bottom: 20, left: 20 };
     const height = 400;

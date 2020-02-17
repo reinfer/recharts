@@ -430,6 +430,7 @@ class Treemap extends PureComponent {
         onMouseEnter: this.handleMouseEnter.bind(this, nodeProps),
         onMouseLeave: this.handleMouseLeave.bind(this, nodeProps),
         onClick: this.handleClick.bind(this, nodeProps),
+        onDoubleClick: this.handleDoubleClick.bind(this, nodeProps),
       };
     }
 

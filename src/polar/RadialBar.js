@@ -59,6 +59,7 @@ class RadialBar extends PureComponent {
     onMouseEnter: PropTypes.func,
     onMouseLeave: PropTypes.func,
     onClick: PropTypes.func,
+    onDoubleClick: PropTypes.func,
 
     isAnimationActive: PropTypes.bool,
     animationBegin: PropTypes.number,

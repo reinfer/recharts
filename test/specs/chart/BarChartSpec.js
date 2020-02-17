@@ -2,6 +2,7 @@ import React from 'react';
 import { expect } from 'chai';
 import { BarChart, Bar, XAxis, YAxis, Tooltip } from 'recharts';
 import { mount, render } from 'enzyme';
+import sinon from 'sinon';
 
 describe('<BarChart />', () => {
   const data = [
@@ -166,4 +167,28 @@ describe('<BarChart />', () => {
     expect(wrapper.find('.customized-shape').length).to.equal(4);
   });
 
+  it('click on bar chart should invoke onClick callback', () => {
+    const onClick = sinon.spy();
+    const wrapper = mount(
+      <BarChart width={100} height={50} data={data} onClick={onClick}>
+        <Bar dataKey="uv" label fill="#ff7300" />
+      </BarChart>
+    );
+
+    const bar = wrapper.find(Bar);
+    bar.simulate('click');
+    expect(onClick.calledOnce).to.equal(true);
+  });
+
+  it('double click on bar chart should invoke onDoubleClick callback', () => {
+    const onDoubleClick = sinon.spy();
+    const wrapper = mount(
+      <BarChart width={100} height={50} data={data} onDoubleClick={onDoubleClick}>
+        <Bar dataKey="uv" label fill="#ff7300" />
+      </BarChart>
+    );
+
+    wrapper.instance().props.onDoubleClick();
+    expect(onDoubleClick.calledOnce).to.equal(true);
+  });
 });

@@ -239,6 +239,10 @@ export default class Demo extends Component {
     console.log(`Pv Bar (${index}) Click: `, data);
   };
 
+  handleDoubleClick = (data, index, e) => {
+    console.log(`Double Click invoked on Bar (${index}): `, data);
+  }
+
   handleBarAnimationStart = () => {
     console.log('Animation start');
   };
@@ -367,6 +371,13 @@ export default class Demo extends Component {
         <div className="bar-chart-wrapper">
           <BarChart width={150} height={40} data={data}>
             <Bar dataKey="uv" fill="#ff7300" onClick={this.handlePvBarClick} background />
+          </BarChart>
+        </div>
+
+        <p>Tiny BarChart with Double Click</p>
+        <div className="bar-chart-wrapper">
+          <BarChart width={150} height={40} data={data}>
+            <Bar dataKey="uv" fill="#ff7300" onDoubleClick={this.handleDoubleClick} background />
           </BarChart>
         </div>
 

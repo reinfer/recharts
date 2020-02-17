@@ -57,6 +57,7 @@ class Radar extends PureComponent {
     onMouseEnter: PropTypes.func,
     onMouseLeave: PropTypes.func,
     onClick: PropTypes.func,
+    onDoubleClick: PropTypes.func,
     isAnimationActive: PropTypes.bool,
     animationId: PropTypes.number,
     animationBegin: PropTypes.number,
