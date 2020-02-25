@@ -35,7 +35,9 @@
     "autofix": "eslint src --fix",
     "analyse": "cross-env NODE_ENV=analyse webpack src/index.js -o umd/Recharts.js"
   },
-  "pre-commit": [],
+  "pre-commit": [
+    "build-cjs"
+  ],
   "pre-push": [
     "test",
     "lint"
