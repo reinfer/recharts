@@ -879,7 +879,7 @@ const generateCategoricalChart = ({
       }
 
       if (legendItem && this.legendInstance) {
-        const legendBox = this.legendInstance.getBBox();
+        const legendBox = this.legendInstance.wrapperNode.getBoundingClientRect();
 
         offset = appendOffsetOfLegend(offset, graphicalItems, props, legendBox);
       }
